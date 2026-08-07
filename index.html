@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ghazal Asaady — product, design, code</title>
 <meta name="description" content="Developer moving into product ownership. I find the problems, design the products, build them, and market them.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#B7B8D2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -20,6 +24,7 @@
     --pink:#EE5B9B;
     --purple:#7E6DE3;
     --mint:#34C79A;
+    --mint-ink:#0E7355;
     --r-xl:2rem;
     --r-lg:1.5rem;
     --r-md:1.125rem;
@@ -35,7 +40,8 @@
 
   body{
     margin:0;
-    background:var(--peri);
+    background:linear-gradient(165deg,#B7B8D2 0%,#BEBBDA 40%,#D3BFD6 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:"DM Sans",system-ui,sans-serif;
     font-size:1rem;
@@ -83,6 +89,15 @@
     font-size:.875rem;font-weight:500;
     color:var(--muted);
   }
+  .nav-links a{position:relative}
+  .nav-links a::after{
+    content:"";position:absolute;left:0;right:0;bottom:-.375rem;height:2px;
+    border-radius:2px;
+    background:linear-gradient(90deg,var(--purple),var(--pink));
+    transform:scaleX(0);transform-origin:left;
+    transition:transform .25s ease;
+  }
+  .nav-links a:hover::after,.nav-links a.on::after{transform:scaleX(1)}
   .nav-links a:hover{color:var(--ink)}
   .nav-links a.on{color:var(--ink);font-weight:600}
   .pill-btn{
@@ -94,12 +109,27 @@
     font-size:.875rem;font-weight:500;
     white-space:nowrap;
   }
-  .pill-btn:hover{box-shadow:var(--sh-lift)}
+  .pill-btn{transition:transform .22s ease,box-shadow .22s ease}
+  .pill-btn:hover{box-shadow:var(--sh-lift);transform:translateY(-2px)}
   .pill-btn.solid{background:var(--ink);color:var(--white)}
 
   /* ================= HERO ================= */
   .hero{position:relative;overflow:hidden}
+  .blob{
+    position:absolute;border-radius:50%;
+    filter:blur(3.5rem);opacity:.42;
+    pointer-events:none;z-index:0;
+    animation:float 15s ease-in-out infinite;
+  }
+  .blob-1{width:20rem;height:20rem;background:var(--purple);top:-7rem;left:-5rem}
+  .blob-2{width:17rem;height:17rem;background:var(--pink);bottom:-6rem;right:-4rem;animation-duration:19s;animation-delay:-5s}
+  .blob-3{width:12rem;height:12rem;background:var(--mint);top:45%;right:14%;opacity:.3;animation-duration:23s;animation-delay:-9s}
+  @keyframes float{
+    0%,100%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(1.5rem,-1.25rem,0) scale(1.1)}
+  }
   .hero-photo{
+    position:relative;
     width:clamp(6.5rem,5rem + 5vw,8.75rem);
     height:clamp(6.5rem,5rem + 5vw,8.75rem);
     flex:none;
@@ -118,10 +148,12 @@
     display:block;
   }
   .hero-inner{
-    position:relative;
+    position:relative;z-index:1;
     padding-block:clamp(2.5rem,7vw,5rem) clamp(1.5rem,4vw,2.5rem);
     text-align:center;
   }
+  h1 .pop{color:var(--purple)}
+  h1 .pop2{color:var(--pink)}
   h1{
     font-weight:800;
     font-size:clamp(2.5rem,1.1rem + 7.4vw,6rem);
@@ -136,6 +168,23 @@
     font-size:clamp(.9375rem,.9rem + .2vw,1.0625rem);
   }
   .hero-cta{display:flex;justify-content:center;gap:.625rem;flex-wrap:wrap;margin-top:1.75rem}
+  .scroll-cue{
+    display:grid;place-items:center;
+    width:2.75rem;height:2.75rem;
+    margin:clamp(2rem,4vw,3rem) auto 0;
+    border-radius:50%;
+    background:var(--white);
+    box-shadow:var(--sh-card);
+    color:var(--purple);
+    animation:bob 2.2s ease-in-out infinite;
+    transition:box-shadow .25s ease;
+  }
+  .scroll-cue:hover{box-shadow:var(--sh-lift)}
+  .scroll-cue svg{width:1.25rem;height:1.25rem}
+  @keyframes bob{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(.4375rem)}
+  }
 
   /* ================= PROJECTS ================= */
   .proj{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:center}
@@ -155,7 +204,11 @@
     display:grid;place-items:center;
     font-family:Poppins,sans-serif;font-weight:700;font-size:.6875rem;
     color:var(--purple);
+    transition:transform .25s ease;
   }
+  .facts li:nth-child(2) em{color:var(--pink)}
+  .facts li:nth-child(3) em{color:var(--mint-ink)}
+  .facts li:hover em{transform:scale(1.15) rotate(-8deg)}
   .proj-link{display:inline-flex;margin-top:1.5rem}
 
   .frame{
@@ -165,6 +218,13 @@
     overflow:hidden;
     display:flex;
     flex-direction:column;
+    transform:rotate(-1.1deg);
+    transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s ease;
+  }
+  .proj.flip .frame{transform:rotate(1.1deg)}
+  .frame:hover,.proj.flip .frame:hover{
+    transform:rotate(0) translateY(-.375rem) scale(1.015);
+    box-shadow:0 2rem 3.5rem -1rem rgba(43,43,54,.36);
   }
   .bar{
     display:flex;align-items:center;gap:.375rem;
@@ -199,12 +259,30 @@
   /* ================= SKILLS ================= */
   .kit{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem}
   .kit-card{
+    position:relative;
     background:var(--white);
     border-radius:var(--r-md);
-    padding:1.125rem;
+    padding:1.375rem 1.125rem 1.125rem;
     box-shadow:var(--sh-card);
+    overflow:hidden;
+    transition:transform .3s ease,box-shadow .3s ease;
   }
-  .kit-card h3{font-size:.8125rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:.5rem}
+  .kit-card::before{
+    content:"";position:absolute;inset:0 0 auto;height:.25rem;
+    background:var(--purple);
+  }
+  .kit-card:nth-child(2)::before{background:var(--pink)}
+  .kit-card:nth-child(3)::before{background:var(--mint)}
+  .kit-card:nth-child(4)::before{background:linear-gradient(90deg,var(--purple),var(--pink))}
+  .kit-card:nth-child(2) h3{color:var(--pink)}
+  .kit-card:nth-child(3) h3{color:var(--mint-ink)}
+  .kit-card:hover{transform:translateY(-.375rem);box-shadow:var(--sh-lift)}
+  .kit-card h3{
+    display:flex;align-items:center;gap:.375rem;
+    font-size:.8125rem;font-weight:600;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--purple);margin-bottom:.5rem;
+  }
+  .kit-card h3 b{font-size:1rem;line-height:1}
   .kit-card p{margin:0;font-size:.875rem;color:var(--muted)}
 
   .panel-head{margin-bottom:1.5rem}
@@ -258,9 +336,18 @@
     .foot{flex-direction:column;gap:.25rem;text-align:center;justify-content:center}
   }
 
+  /* ================= REVEAL ================= */
+  .reveal{opacity:0;transform:translateY(1.25rem)}
+  .reveal.in{
+    opacity:1;transform:none;
+    transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);
+  }
+
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    *{transition:none !important}
+    *{transition:none !important;animation:none !important}
+    .reveal{opacity:1;transform:none}
+    .frame,.proj.flip .frame{transform:none}
   }
 </style>
 </head>
@@ -270,6 +357,9 @@
 
   <!-- ============ HERO ============ -->
   <header class="panel hero">
+    <span class="blob blob-1" aria-hidden="true"></span>
+    <span class="blob blob-2" aria-hidden="true"></span>
+    <span class="blob blob-3" aria-hidden="true"></span>
     <nav class="nav">
 <a class="brand" href="#top">
   <span class="brand-text">
@@ -286,11 +376,14 @@
 
     <div class="hero-inner" id="top">
       <div class="hero-photo"><img src="images/ghazal.jpg" alt="Portrait of Ghazal Asaady"></div>
-      <h1>Product, design, code.</h1>
+      <h1>Product, <span class="pop">design</span>, <span class="pop2">code</span>.</h1>
       <p class="sub">Developer moving into product ownership. I find the problems, make the product decisions, design them, and take them to market.</p>
       <div class="hero-cta">
         <a class="pill-btn" href="#contact">Get in touch</a>
       </div>
+      <a class="scroll-cue" href="#unwrappa" aria-label="Scroll to my work">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
     </div>
   </header>
 
@@ -383,19 +476,19 @@
     </div>
     <div class="kit">
       <div class="kit-card">
-        <h3>Building</h3>
+        <h3><b aria-hidden="true">🛠</b> Building</h3>
         <p>React, TypeScript, Tailwind, Next.js, Node, Payload, Supabase. Angular, RxJS and NgRx from earlier work.</p>
       </div>
       <div class="kit-card">
-        <h3>Designing</h3>
+        <h3><b aria-hidden="true">🎨</b> Designing</h3>
         <p>Interface and visual design, brand and copy, Figma. Both product identities are my own work, and so is this page.</p>
       </div>
       <div class="kit-card">
-        <h3>Owning</h3>
+        <h3><b aria-hidden="true">🧭</b> Owning</h3>
         <p>Specs for engineering and clinical review, vendor evaluation, funnel analysis, pricing, coordination across teams.</p>
       </div>
       <div class="kit-card">
-        <h3>How</h3>
+        <h3><b aria-hidden="true">⚡</b> How</h3>
         <p>Heavy use of AI-assisted development. It is a big part of how I get from an idea to something working quickly.</p>
       </div>
     </div>
@@ -430,6 +523,23 @@
     });
   }, { rootMargin: '-20% 0px -65% 0px' });
   targets.forEach(function(t){ io.observe(t); });
+})();
+
+/* Reveal panels on scroll. Classes are added by JS so a no-JS page stays visible. */
+(function(){
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.shell > .panel:not(.hero)'));
+  if (!panels.length) return;
+  panels.forEach(function(p){ p.classList.add('reveal'); });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+  panels.forEach(function(p){ io.observe(p); });
 })();
 </script>
 </body>
