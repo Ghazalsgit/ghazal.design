@@ -206,8 +206,8 @@
     color:var(--purple);
     transition:transform .25s ease;
   }
-  .facts li:nth-child(2) em{color:var(--pink)}
-  .facts li:nth-child(3) em{color:var(--mint-ink)}
+  .facts li:nth-child(3n+2) em{color:var(--pink)}
+  .facts li:nth-child(3n+3) em{color:var(--mint-ink)}
   .facts li:hover em{transform:scale(1.15) rotate(-8deg)}
   .proj-link{display:inline-flex;margin-top:1.5rem}
 
@@ -396,8 +396,9 @@
         <ul class="facts">
           <li><em>1</em><span>Matching goes both ways. Brands can invite creators they want, and creators can apply to brands themselves, so a collaboration can start from either side instead of over cold DMs.</span></li>
           <li><em>2</em><span>Creators are verified manually before they can apply. Slower to grow, but it means a brand can trust who is reaching out to them.</span></li>
-          <li><em>3</em><span>500 creators and 14 brands today, on recurring monthly revenue that is still growing. I run the growth myself and ship improvements most days.</span></li>
-          <li><em>4</em><span>Mine from the first idea to launch: the problem, the product decisions, the design, and the marketing.</span></li>
+          <li><em>3</em><span>500 creators and 14 brands today, on recurring monthly revenue that is still growing. I run the growth myself.</span></li>
+          <li><em>4</em><span>Improvements come straight from the users. Creators and brands send me reviews and tell me what is not working, and I ship a fix. That loop runs most days.</span></li>
+          <li><em>5</em><span>Mine from the first idea to launch: the problem, the product decisions, the design, and the marketing.</span></li>
         </ul>
         <a class="pill-btn proj-link" href="https://unwrappa.com">Visit unwrappa.com</a>
       </div>
@@ -424,8 +425,9 @@
         <ul class="facts">
           <li><em>1</em><span>Pick a template, fill in your numbers, download. It replaces an afternoon in a design tool, so a creator can have a good kit whether or not they know how to design.</span></li>
           <li><em>2</em><span>Built as its own product rather than a feature inside Unwrappa. Every creator needs it, including the ones who will never join a marketplace.</span></li>
-          <li><em>3</em><span>Free to preview, paid to download. Around two sales a week, with all the marketing done by me.</span></li>
-          <li><em>4</em><span>My second product, started while the first was running and taken from idea to launch on my own initiative.</span></li>
+          <li><em>3</em><span>Free to preview, paid to download. A couple of sales a week, with all the marketing done by me.</span></li>
+          <li><em>4</em><span>I watch the funnel in PostHog: who previews, where they hesitate, where they leave without downloading. The drop-offs decide what I change next.</span></li>
+          <li><em>5</em><span>My second product, started while the first was running and taken from idea to launch on my own initiative.</span></li>
         </ul>
         <a class="pill-btn proj-link" href="https://www.mediakitster.se/">Visit mediakitser.se</a>
       </div>
@@ -484,7 +486,7 @@
       </div>
       <div class="kit-card">
         <h3><b aria-hidden="true">🧭</b> Owning</h3>
-        <p>Specs for engineering and clinical review, vendor evaluation, funnel analysis, pricing, coordination across teams.</p>
+        <p>Specs for engineering and clinical review, vendor evaluation, funnel analysis in PostHog, pricing, coordination across teams.</p>
       </div>
       <div class="kit-card">
         <h3><b aria-hidden="true">⚡</b> How</h3>
